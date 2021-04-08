@@ -1,0 +1,7 @@
+{
+    "mynewdev_appsync" : {
+        "url" : "your appsync endpoint",
+        "apiKey": "your appsync api key",
+        "region": "your aws region"
+    }
+}

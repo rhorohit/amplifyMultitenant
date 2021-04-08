@@ -1,0 +1,82 @@
+type Tenant @model @auth(rules: [
+    { allow: public, provider: apiKey, operations: [read] },
+    { allow: groups, groups: ["InternalAdmin"], operations: [create, read, update, delete]},
+    { allow: groups, groupsField: "id", operations: [read, update] }
+    { allow: groups, groupsField: "id", groupClaim: "teamAdmin", operations: [read] }    
+  ]) {
+  id: ID!
+  name: String!
+  details: String
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  teams: [Team] @connection(keyName: "byTenant", fields: ["id"])
+}
+
+type User @model @auth(rules: [
+    { allow: public, provider: apiKey, operations: [read] },
+    # allow the User to read, update their own User record
+    { allow: owner, ownerField: "id", identityClaim: "userID", operations: [create, read, update]},
+    # static group
+    { allow: groups, groups: ["InternalAdmin"], operations: [create, read, update, delete]},
+    { allow: groups, groupsField: "tenantID", operations: [create, read, update] }
+    { allow: groups, groupsField: "tenantID", groupClaim: "teamAdmin", operations: [read] }    
+  ]) @key(name: "userByEmail", fields: ["email"], queryField: "userByEmail")
+{
+  id: ID
+  email: String
+  tenantID: ID!
+  tenant: Tenant @connection (fields: ["tenantID"])
+  firstName: String!
+  lastName: String
+  teams: [UserTeam] @connection(keyName: "byUser", fields: ["id"])
+  userRole: [UserType!]!
+}
+
+enum UserType {
+  TeamManager
+  SubAgent
+  Customer
+  TenantAdmin
+  InternalAdmin
+}
+
+type Team @model  @auth(rules: [
+    { allow: public, provider: apiKey, operations: [read] },
+    { allow: groups, groups: ["InternalAdmin"], operations: [create, read, update, delete]},
+    { allow: groups, groupsField: "tenantID", operations: [create, read, update, delete] }
+    { allow: groups, groupsField: "id", operations: [read, update] }
+  ])
+  @key(name: "byTenant", fields: ["tenantID", "teamName"]){
+  id: ID!
+  teamName: String!
+  tenantID: ID!
+  users: [UserTeam] @connection(keyName: "byTeam", fields: ["id"])
+}
+
+type UserTeam @model
+ @auth(rules: [
+    { allow: public, provider: apiKey, operations: [read]  },
+    {allow: groups, groups: ["InternalAdmin"], operations: [create, read, update, delete]}
+    { allow: groups, groupsField: "tenantID", operations: [create, read, update, delete] }
+    { allow: groups, groupsField: "tenantID", groupClaim: "teamAdmin", operations: [read] }   
+  ])
+  @key(name: "byUser", fields: ["userID", "teamID"])
+  @key(name: "byTeam", fields: ["teamID", "userID"]) {
+  id: ID!
+  teamID: ID!
+  userID: ID!
+  tenantID: ID!
+  createdAt: AWSDateTime
+  updatedAt: AWSDateTime
+  team: Team! @connection(fields: ["teamID"])
+  user: User! @connection(fields: ["userID"])
+}
+
+input createUserSignupInput {
+  id: ID
+  email: String!
+}
+
+type Mutation {
+createUserSignup(input: createUserSignupInput!): String @function(name: "xcrmoperations-${env}")
+}
