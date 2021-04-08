@@ -7,13 +7,19 @@ It is working as expected in AWS Console Appsync GraphiQL. But the same is parti
 
 i.e. I am able to fetch records for Teams model using Postman API call but not for User model.
 
+Pre-requisites for project ( install the below softwares) - 
+1) node 14.15.0,
+2) npm 6.14+
+3) amplify cli - 4.45.0
+
 Steps to reproduce the issue:
 
 1) Clone the project and do npm install from the root folder.
-2) Create a Cognito User and add that to InternalAdmin cognito group. The password is temporary and you have to login again to change it.
-3) You have to update your Internal Admin cognito user email id in ./src/admin/createAdminUser.js. No need to Push this change.
-4) Update your environment details in .\amplify\backend\function\amplifyauthprojectc0e31684PreTokenGeneration\src\config.json and Push this to AWS.
-5) load sample data run the below command from amplify home path
+2) 
+3) Create a Cognito User and add that to InternalAdmin cognito group. The password is temporary and you have to login again to change it.
+4) You have to update your Internal Admin cognito user email id in ./src/admin/createAdminUser.js. No need to Push this change.
+5) Update your environment details in .\amplify\backend\function\amplifyauthprojectc0e31684PreTokenGeneration\src\config.json and Push this to AWS.
+6) load sample data run the below command from amplify home path
   > node -r esm ./src/admin/adminData.js
   
 **Use Node Script to retrieve data:**
