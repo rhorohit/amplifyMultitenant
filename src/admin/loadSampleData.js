@@ -10,34 +10,6 @@ exports.handler = async () => {
   console.log("loading insurers List completed.")
 };
 
-
-export async function fetchAllData(agentEmail) {
-  console.log("fetching the Contacts for SUBAGENT1 \n");
-  let email = agentEmail
-  let password = cfg.users.adminUser.password;
-
-
-  console.log("\nfetching the Contacts for MASTERAGENT\n");
-
-  const MasterAgent = await signin(email, password).then(async (data) => {
-    console.log(data)
-    return await fetchContacts()
-      .then(() => {
-        signout();
-      })
-      .catch(() => {
-        signout();
-      });
-  });
-}
-
-async function fetchContacts() {
-  console.log("the values ")
-  const allContacts = await API.graphql({ query: queries.listContacts });
-  console.log("fetched Contacts ", JSON.stringify(allContacts.data.listContacts.items))
-  return JSON.stringify(allContacts.data.listContacts.items)
-}
-
 /**
  * load
  */
@@ -96,12 +68,6 @@ async function deleteAllData() {
     });
     cfg.SubAgents.forEach(ele => {
       deleteItem("User", ele.SubAgent.id)
-    });
-    cfg.UserTeams.forEach(ele => {
-      deleteItem("UserTeam1", ele.userTeam.id)
-    });
-    cfg.Contacts.forEach(ele => {
-      deleteItem("Contact", ele.contact.id)
     });
     console.log("Test")
       .then(() => {

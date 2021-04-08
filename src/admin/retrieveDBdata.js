@@ -3,25 +3,18 @@ import cfg from "./sampleDataConfig.js";
 import defaultExport from "../aws-exports";
 import * as queries from '../graphql/queries';
 import { Amplify, API, graphqlOperation } from "aws-amplify";
-// import cfgData from './configData.json';
 
-var axios = require("axios");
-const gql = require('graphql-tag');
 const graphql = require('graphql');
-const { print } = graphql;
 
 Amplify.configure(defaultExport);
-
-const sleep = (milliseconds) => { return new Promise(resolve => setTimeout(resolve, milliseconds)) }
-
 fetchAllData()
 
 async function fetchAllData() {
     console.log("Executing List Queries for user \n");
     try {
-        await queryData(cfg.Users[0].user.username, cfg.Users[0].user.password);
-        // await queryData(cfg.Users[2].user.username, cfg.Users[1].user.password);
-        // await queryData(cfg.Users[3].user.username, cfg.Users[1].user.password);
+        await queryData(cfg.Users[1].user.username, cfg.Users[1].user.password);
+        await queryData(cfg.Users[2].user.username, cfg.Users[2].user.password);
+        await queryData(cfg.Users[3].user.username, cfg.Users[3].user.password);
 
     }
     catch (error) {

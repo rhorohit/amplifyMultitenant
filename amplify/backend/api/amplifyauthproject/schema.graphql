@@ -77,6 +77,3 @@ input createUserSignupInput {
   email: String!
 }
 
-type Mutation {
-createUserSignup(input: createUserSignupInput!): String @function(name: "xcrmoperations-${env}")
-}
