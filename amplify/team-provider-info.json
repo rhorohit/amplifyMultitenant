@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifyauthproject-dev-164316-authRole",
+      "UnauthRoleArn": "arn:aws:iam::652797701363:role/amplify-amplifyauthproject-dev-164316-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::652797701363:role/amplify-amplifyauthproject-dev-164316-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-amplifyauthproject-dev-164316-deployment",
+      "UnauthRoleName": "amplify-amplifyauthproject-dev-164316-unauthRole",
+      "StackName": "amplify-amplifyauthproject-dev-164316",
+      "StackId": "arn:aws:cloudformation:ap-south-1:652797701363:stack/amplify-amplifyauthproject-dev-164316/f1c83100-95ff-11eb-a414-02d408f4a0e2",
+      "AmplifyAppId": "dhcfkkxa7po7q"
+    },
+    "categories": {
+      "auth": {
+        "amplifyauthprojectc0e31684": {}
+      },
+      "function": {
+        "amplifyauthprojectc0e31684PreTokenGeneration": {
+          "deploymentBucketName": "amplify-amplifyauthproject-dev-164316-deployment",
+          "s3Key": "amplify-builds/amplifyauthprojectc0e31684PreTokenGeneration-4d362f425235355a476e-build.zip"
+        }
+      }
+    }
+  }
+}

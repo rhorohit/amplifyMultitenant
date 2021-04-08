@@ -1,0 +1,55 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "authamplifyauthprojectc0e31684UserPoolId": {
+            "Type": "String",
+            "Default": "authamplifyauthprojectc0e31684UserPoolId"
+        },
+        
+        "authamplifyauthprojectc0e31684AppClientID": {
+            "Type": "String",
+            "Default": "authamplifyauthprojectc0e31684AppClientID"
+        },
+        "authamplifyauthprojectc0e31684AppClientIDWeb": {
+            "Type": "String",
+            "Default": "authamplifyauthprojectc0e31684AppClientIDWeb"
+        },
+        "AuthRoleArn": {
+            "Type": "String"
+        },
+        "UnauthRoleArn": {
+            "Type": "String"
+        },
+        "env": {
+            "Type": "String"
+        }
+    },
+    "Conditions": {
+        "ShouldNotCreateEnvResources": {
+            "Fn::Equals": [
+                {
+                    "Ref": "env"
+                },
+                "NONE"
+            ]
+        }
+    },
+    "Resources": {
+    
+        "InternalAdminGroup": {
+          "Type" : "AWS::Cognito::UserPoolGroup",
+          "Properties" : {
+              "GroupName" : "InternalAdmin",
+              "Precedence" : 1,
+              
+              "UserPoolId" : {
+                "Ref": "authamplifyauthprojectc0e31684UserPoolId"
+              }
+            }
+        },
+        
+    
+    
+    },
+    
+}
