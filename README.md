@@ -9,11 +9,13 @@ i.e. I am able to fetch records for Teams model using Postman API call but not f
 
 Steps to reproduce the issue:
 
-1) Create a Cognito User and add that to InternalAdmin cognito group. The password is temporary and you have to login again to change it.
-2) Update you environment details in .\amplify\backend\function\amplifyauthprojectc0e31684PreTokenGeneration\src\config.json
-3) load sample data run the below command from amplify home path
+1) Clone the project and do npm install from the root folder.
+2) Create a Cognito User and add that to InternalAdmin cognito group. The password is temporary and you have to login again to change it.
+3) You have to update your Internal Admin cognito user email id in ./src/admin/createAdminUser.js. No need to Push this change.
+4) Update your environment details in .\amplify\backend\function\amplifyauthprojectc0e31684PreTokenGeneration\src\config.json and Push this to AWS.
+5) load sample data run the below command from amplify home path
   > node -r esm ./src/admin/adminData.js
-  > 
+  
 **Use Node Script to retrieve data:**
 run below command to fetch the records from DB
   > node -r esm ./src/admin/retrieveDBdata.js
@@ -25,9 +27,11 @@ Find the results fetched when script in step 4 will be executed:
     
 **Postman API Call:**
 i) UserRole: Team Manager => This user is able to retrieve Team data.
+
 ![image](https://user-images.githubusercontent.com/68864040/113997229-90087100-9875-11eb-8681-ba93f95c0f80.png)
 
 ii) UserRole: Team Manager => The same user is not able to retrieve User data.
+
 ![image](https://user-images.githubusercontent.com/68864040/113997477-ce9e2b80-9875-11eb-87a4-6bbc95ba4e3e.png)
 
 **Appsync GraphiQL Explorer**
@@ -35,5 +39,5 @@ UserRole: Team Manager => This user is able to retrieve Team as well as User rec
 
 ![image](https://user-images.githubusercontent.com/68864040/113997903-32285900-9876-11eb-8229-2273c3764dee.png)
 
-Expected Result:
+**Expected Result:**
 Results should be consistant when fetch request triggers from any source, either it's AWS Amplify Appsync Console or Node script or Postman API call...
