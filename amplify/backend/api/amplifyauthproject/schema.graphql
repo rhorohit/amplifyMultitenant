@@ -68,8 +68,8 @@ type UserTeam @model
   tenantID: ID!
   createdAt: AWSDateTime
   updatedAt: AWSDateTime
-  team: Team! @connection(fields: ["teamID"])
-  user: User! @connection(fields: ["userID"])
+  team: Team @connection(fields: ["teamID"])
+  user: User @connection(fields: ["userID"])
 }
 
 input createUserSignupInput {
