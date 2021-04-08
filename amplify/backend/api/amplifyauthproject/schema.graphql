@@ -76,4 +76,3 @@ input createUserSignupInput {
   id: ID
   email: String!
 }
-
