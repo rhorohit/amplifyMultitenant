@@ -9,14 +9,31 @@ i.e. I am able to fetch records for Teams model using Postman API call but not f
 
 Steps to reproduce the issue:
 
-1) Create a Cognito User and add that to InternalAdmin cognito group
+1) Create a Cognito User and add that to InternalAdmin cognito group. The password is temporary and you have to login again to change it.
 2) Update you environment details in .\amplify\backend\function\amplifyauthprojectc0e31684PreTokenGeneration\src\config.json
 3) load sample data run the below command from amplify home path
   > node -r esm ./src/admin/adminData.js
-4) run below command to fetch the records from DB
+  > 
+**Use Node Script to retrieve data:**
+run below command to fetch the records from DB
   > node -r esm ./src/admin/retrieveDBdata.js
-5) Find the results fetched when script in step 4 will be executed:
+  
+Find the results fetched when script in step 4 will be executed:
     a) User - Tenant Admin => Fetches Tenant, Team and User recods
     b) User - Team Manager => Fetches Team records only but it should fetch User records as well
-    c) User - Sub Agent => It fetches nothing.
+    c) User - Sub Agent => It fetches nothing but it should fetch User records.
     
+**Postman API Call:**
+i) UserRole: Team Manager => This user is able to retrieve Team data.
+![image](https://user-images.githubusercontent.com/68864040/113997229-90087100-9875-11eb-8681-ba93f95c0f80.png)
+
+ii) UserRole: Team Manager => The same user is not able to retrieve User data.
+![image](https://user-images.githubusercontent.com/68864040/113997477-ce9e2b80-9875-11eb-87a4-6bbc95ba4e3e.png)
+
+**Appsync GraphiQL Explorer**
+UserRole: Team Manager => This user is able to retrieve Team as well as User records
+
+![image](https://user-images.githubusercontent.com/68864040/113997903-32285900-9876-11eb-8229-2273c3764dee.png)
+
+Expected Result:
+Results should be consistant when fetch request triggers from any source, either it's AWS Amplify Appsync Console or Node script or Postman API call...
