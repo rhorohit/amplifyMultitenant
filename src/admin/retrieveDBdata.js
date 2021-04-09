@@ -4,8 +4,6 @@ import defaultExport from "../aws-exports";
 import * as queries from '../graphql/queries';
 import { Amplify, API, graphqlOperation } from "aws-amplify";
 
-const graphql = require('graphql');
-
 Amplify.configure(defaultExport);
 fetchAllData()
 
