@@ -97,9 +97,17 @@ query MyQuery {
 
 **Actual Result of the testing**
 1) TenantAdmin is able to acess all the available records - same as expected result.
-2) TeamManager is able to access his Team info - same as expected result.
-3) TeamManager is **NOT** able to access **ANY** user data or tenant info - **Failed Scenario**
-4) SubAgent is **NOT** able to access his own user record - **Failed Scenario**
+retrived results Successfully, retrived all the tenant related teams and users - 
+![image](https://user-images.githubusercontent.com/58698937/114183319-30878f80-9961-11eb-8680-b8648b6862ca.png)
+
+3) TeamManager is able to access his Team info - same as expected result.
+4) TeamManager is **NOT** able to access **ANY** user data or tenant info - **Failed Scenario**
+retrived results: retrived Team, But failed to retrive the Users
+![image](https://user-images.githubusercontent.com/58698937/114183656-86f4ce00-9961-11eb-9168-754c15d814e1.png)
+
+5) SubAgent is **NOT** able to access his own user record - **Failed Scenario**
+retrived results: nither retrived the team, nor the own user information.
+   ![image](https://user-images.githubusercontent.com/58698937/114183912-cf13f080-9961-11eb-9d4a-4cef1d792be7.png)
 
 
 **3) Postman API Call to execute listTenants, listUsers and listTeams queries:**
@@ -126,3 +134,6 @@ Find the screenshots of the results of my Postman API call as below:
 
 **ListUsers**
 ![image](https://user-images.githubusercontent.com/68864040/113997477-ce9e2b80-9875-11eb-87a4-6bbc95ba4e3e.png)
+
+
+
